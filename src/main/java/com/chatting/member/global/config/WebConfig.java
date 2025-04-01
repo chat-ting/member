@@ -26,6 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/test/**")
                 .excludePathPatterns(
                         "/api/kakao/**",
+                        "/api/rest/kakao/**",
                         "/api/token/by/refresh");
         registry.addInterceptor(authorizationInterceptor)
                 .order(3)

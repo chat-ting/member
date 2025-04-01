@@ -1,0 +1,30 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+    <link rel="stylesheet" th:href="@{/css/style2.css}"/>
+
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+    <aside th:replace="~{fragments/aside :: aside}"></aside>
+    <div class="main-content">
+        <h1>Setting</h1>
+
+        <!-- alert 메시지가 존재할 경우 화면에 표시 -->
+        <div th:if="${alert}" class="alert alert-warning">
+            <p th:text="${alert}"></p>
+        </div>
+        <form action="/api/view/settings/telegram" method="post">
+            <button type="submit">텔레그램 연동</button>
+        </form>
+    </div>
+</div>
+
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>

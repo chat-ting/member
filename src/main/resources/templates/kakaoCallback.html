@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kakao Callback</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h1>Kakao Login Successful</h1>
+<p>Access Token and Refresh Token have been saved in cookies.</p>
+<a href="/api/view/keyword">Go to Keywords</a>
+</body>
+</html>

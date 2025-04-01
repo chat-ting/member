@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List</title>
+    <link rel="stylesheet" th:href="@{/css/style2.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+
+    <aside th:replace="~{fragments/aside :: aside}"></aside>
+
+    <div class="main-content">
+        <h1>게시판 목록</h1>
+        <table class="post-table" >
+            <thead>
+            <tr>
+                <th>게시판</th>
+                <th>마지막 체크 시간</th>
+                <th>이전 체크 시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Thymeleaf를 사용하여 서버에서 게시글 데이터를 반복 렌더링 -->
+            <tr th:each="board : ${boards}">
+                <td>
+                    <a th:text="${board.nameKor}" th:href="@{/api/view/posts/{boardId}/board(boardId=${board.id})}"></a>
+                </td>
+                <td>
+                    <span th:if="${board.lastCrawledAt != null}"
+                          th:text="${#temporals.format(board.lastCrawledAt.withZoneSameInstant(T(java.time.ZoneId).of('Asia/Seoul')), 'yyyy-MM-dd HH:mm')}"></span>
+                    <span th:if="${board.lastCrawledAt == null}">-</span>
+                </td>
+                <!-- 이전 체크 시간 (한국 시간으로 변환 및 null 체크) -->
+                <td>
+                    <span th:if="${board.previousCrawledAt != null}"
+                          th:text="${#temporals.format(board.previousCrawledAt.withZoneSameInstant(T(java.time.ZoneId).of('Asia/Seoul')), 'yyyy-MM-dd HH:mm')}"></span>
+                    <span th:if="${board.previousCrawledAt == null}">-</span>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+</div>
+
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>

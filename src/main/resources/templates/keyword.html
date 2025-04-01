@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Keyword Registration</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h1>Register Keyword</h1>
+<form id="keywordForm" th:action="@{/api/view/keyword}" method="post">
+    <input type="text" id="keyword" name="keyword" placeholder="Enter keyword" required />
+    <button type="submit">Register</button>
+</form>
+
+<h2>Registered Keywords</h2>
+<ul>
+    <li th:each="keyword : ${keywords}">
+        <span th:text="${keyword}">Keyword Name</span>
+    </li>
+</ul>
+</body>
+</html>

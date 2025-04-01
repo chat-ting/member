@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver # PostgreSQL JDBC ????? ?????.
+    url: jdbc:postgresql://${POSTGRES_DB_HOST}:${POSTGRES_DB_PORT}/${POSTGRES_DB_NAME}?serverTimezone=UTC
+    platform: postgres # ???? ?????? ???? ?????.
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        show_sql: true
+        default_batch_fetch_size: 100
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        use_sql_comments: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}:${KAFKA_BOOTSTRAP_SERVERS_PORT}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: new_post
+      auto-offset-reset: earliest
+      enable-auto-commit: false  # 자동 오프셋 커밋을 끔
+kakao:
+  host-name: KAKAO
+  client-id: ${KAKAO_CLIENT_ID}
+  client-secret: ${KAKAO_CLIENT_SECRET}
+  redirect-uri: ${KAKAO_REDIRECT_URI}
+  logout-redirect-uri: ${KAKAO_LOGOUT_REDIRECT_URI}
+
+jwt:
+  secret-key: ${JWT_SECRET_KEY}
+  access-token-expiration-time: 900000 #60*15*1000
+  refresh-token-expiration-time: 259200000 #60*60*24*3*1000

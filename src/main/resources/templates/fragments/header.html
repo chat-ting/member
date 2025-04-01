@@ -1,0 +1,31 @@
+<!-- fragments/header.html -->
+<div th:fragment="header">
+    <header>
+        <!-- 헤더 이미지 삽입 -->
+        <div class="header-image">
+            <img th:src="@{/img/jhineye_logo.png}" alt="Site Logo" />
+        </div>
+
+        <nav>
+            <table>
+                <tr>
+                    <td>
+                        <a th:href="@{/api/view/posts?page=0&size=10}" th:text="Post">Board</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/api/view/status}" th:text="Status">Status</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/api/view/requests}" th:text="Request">Request</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/api/view/settings/keyword}" th:text="Setting">Setting</a>
+                    </td>
+                    <td class="logout-link">
+                        <a th:href="@{/api/view/settings/logout/kakao}">Logout</a>
+                    </td>
+                </tr>
+            </table>
+        </nav>
+    </header>
+</div>

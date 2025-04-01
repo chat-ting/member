@@ -1,0 +1,35 @@
+server:
+  port: 8765
+
+spring:
+  profiles:
+    active: local
+  jackson:
+    time-zone: UTC
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test?serverTimezone=UTC
+    platform: postgres
+    username: yanoos
+    password: yanoos
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        show_sql: true
+        default_batch_fetch_size: 100
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        use_sql_comments: true
+
+jwt:
+  secret-key: temp-secret-key
+  access-token-expiration-time: 900000 #60*15*1000
+  refresh-token-expiration-time: 259200000 #60*60*24*3*1000
+

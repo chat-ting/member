@@ -1,0 +1,224 @@
+/* 기본 스타일 초기화 */
+body, h1, h2, h3, h4, h5, h6, p, table, tr, td, nav, aside, header {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 기본 폰트 및 배경색 설정 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5; /* 페이지 배경색을 밝은 회색으로 설정 */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px; /* 헤더 상하와 좌우 패딩 설정 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-image {
+    flex: 0 0 10%;
+}
+
+.header-image img {
+    height: 50px;
+    width: 100%;
+    display: block;
+}
+
+nav {
+    flex: 1;
+    text-align: center;
+}
+
+nav table {
+    margin: 0 auto;
+    width: 100%; /* 네비게이션 테이블의 너비를 전체로 설정 */
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px 20px; /* 좌우 패딩을 늘려 링크가 더 넓은 공간을 차지하도록 설정 */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* 텍스트 줄 바꿈을 방지하여 가로로 길게 표시되도록 설정 */
+}
+
+nav a:hover {
+    background-color: #45a049;
+}
+
+/* 컨테이너 및 사이드바 스타일 */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    gap: 20px; /* 사이드바와 메인 콘텐츠 사이의 간격 설정 */
+}
+
+aside {
+    width: 15%; /* 전체 화면의 15%를 사이드바가 차지 */
+    background-color: #333;
+    padding: 10px; /* 내부 패딩을 더 넉넉하게 설정 */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px; /* 사이드바 모서리를 둥글게 설정 */
+    display: flex;
+    flex-direction: column; /* 링크들을 세로로 정렬 */
+    align-items: flex-start; /* 링크들이 좌측에 정렬되도록 설정 */
+}
+
+aside nav {
+    width: 100%; /* 네비게이션이 사이드바의 전체 너비를 차지하도록 설정 */
+}
+
+aside nav a {
+    display: block; /* 네비게이션 링크를 블록 요소로 설정하여 가로로 표시 */
+    padding: 10px 15px; /* 링크 내부 패딩 설정 */
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    white-space: nowrap; /* 텍스트 줄 바꿈을 방지하여 가로로 길게 표시되도록 설정 */
+    width: 100%; /* 링크가 사이드바의 전체 너비를 차지하도록 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 전체 크기 계산 */
+}
+
+aside nav a:hover {
+    background-color: #555;
+}
+
+/* 메인 콘텐츠 스타일 */
+.main-content {
+    flex: 1;
+    margin-left: 5%; /* 좌측 여백을 5%로 설정 */
+    padding: 25px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* 게시글 목록 테이블 스타일 */
+.post-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.post-table th, .post-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.post-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.post-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.post-table a {
+    color: #333;
+    text-decoration: none;
+}
+
+.post-table a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+/* 반응형 디자인 - 화면 너비가 768px 이하일 때 적용 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 0 10px; /* 작은 화면에서는 패딩을 줄임 */
+    }
+
+    aside {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    header, nav a {
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    .post-table th, .post-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .post-table {
+        margin-top: 15px;
+    }
+}
+.logout-link a {
+    color: black; /* Logout 링크 텍스트를 빨간색으로 설정 */
+    font-weight: bold; /* 텍스트를 굵게 표시 (선택 사항) */
+}
+
+.logout-link a:hover {
+    color: black; /* 마우스 오버 시 색상을 어두운 빨간색으로 변경 */
+}
+.pagination ul {
+    list-style: none; /* 기본 목록 스타일 제거 */
+    display: flex; /* 가로 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination ul li {
+    margin: 0 5px; /* 버튼 간 간격 */
+}
+
+.pagination ul li a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination ul li a.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination ul li a:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카카오 로그인 페이지</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="wrapper">
+    <!-- alert 메시지가 존재할 경우 화면에 표시 -->
+    <div th:if="${alert}" class="alert alert-warning">
+        <p th:text="${alert}"></p>
+    </div>
+    <form action="/api/member/telegram-uuid" method="post">
+        <button type="submit">텔레그램 연동</button>
+    </form>
+</div>
+</body>
+</html>

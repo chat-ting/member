@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카카오 로그인 페이지</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="wrapper">
+    <a th:href="@{'https://kauth.kakao.com/oauth/logout'(client_id=${clientId}, logout_redirect_uri=${logoutRedirectUri})}">
+        <div class="content">
+            카카오 로그아웃
+        </div>
+    </a>
+</div>
+</body>
+</html>

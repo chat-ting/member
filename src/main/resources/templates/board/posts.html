@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List</title>
+    <link rel="stylesheet" th:href="@{/css/style2.css}"/>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+
+    <aside th:replace="~{fragments/aside :: aside}"></aside>
+
+    <div class="main-content">
+        <h1 th:text="${board.nameKor}">
+
+        </h1>
+        <table class="post-table">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>게시판</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Thymeleaf를 사용하여 서버에서 게시글 데이터를 반복 렌더링 -->
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.getPostNo()}"></td>
+                <td>
+                    <a th:href="@{/api/view/posts/{postId}/site(postId=${post.getPostId()})}"
+                       th:text="${post.getPostTitle()}"></a>
+                </td>
+                <td>
+                    <a th:href="@{${post.getBoard().getSiteUrl()}}"
+                       th:text="${post.getBoard().getNameKor()}"></a>
+
+
+                </td>
+<!--                <td>-->
+<!--                    <form th:action="@{/api/view/posts/{mapMemberPostId}/checked(mapMemberPostId=${post.getMapMemberPostId()})}" th:method="post">-->
+<!--                        <input type="hidden" name="mapMemberPostId" th:value="${post.getMapMemberPostId()}"/>-->
+<!--                        <input type="hidden" name="isChecked" th:value="${post.isChecked()}"/>-->
+<!--                        <input type="checkbox" th:checked="${post.isChecked()}"-->
+<!--                               onclick="this.form.submit(); event.preventDefault();"/>-->
+<!--                    </form>-->
+<!--                </td>-->
+<!--                <td th:text="${post.getKeywords()}"></td>-->
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <ul>
+                <li th:if="${currentPage > 0}">
+                    <a th:href="@{/api/view/posts/{boardId}/board(page=${currentPage - 1},boardId=${board.id})}">이전</a>
+                </li>
+
+                <!-- 페이지 번호 -->
+                <li th:each="i : ${#numbers.sequence(
+            currentPage / 10 * 10,
+            (currentPage / 10 * 10 + 9) < totalPages ? (currentPage / 10 * 10 + 9) : (totalPages - 1)
+        )}">
+                    <a th:href="@{/api/view/posts/{boardId}/board(page=${i},boardId=${board.id})}"
+                       th:classappend="${i == currentPage} ? 'active'"
+                       th:text="${i + 1}"></a>
+                </li>
+
+                <!-- 다음 버튼 -->
+                <li th:if="${currentPage < totalPages - 1}">
+                    <a th:href="@{/api/view/posts/{boardId}/board(page=${currentPage + 1},boardId=${board.id})}">다음</a>
+                </li>
+            </ul>
+        </div>
+
+</div>
+
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+    <link rel="stylesheet" th:href="@{/css/style2.css}"/>
+
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+    <aside th:replace="~{fragments/aside :: aside}"></aside>
+    <div class="main-content"  th:utext="${content}">
+
+    </div>
+
+</div>
+
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>

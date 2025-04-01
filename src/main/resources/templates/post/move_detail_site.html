@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List</title>
+    <link rel="stylesheet" th:href="@{/css/style2.css}"/>
+</head>
+<body>
+<h1 th:text="'공지사항 상세조회: ' + ${post.title}"></h1>
+
+
+<a th:if="${post.method == 'GET'}" th:href="${post.endpoint}" target="_blank">상세 페이지 이동 (GET)</a>
+
+<form th:if="${post.method == 'POST'}" th:action="${post.endpoint}" method="post">
+    <input type="hidden" th:each="entry : ${post.parameterMap.entrySet()}"
+           th:name="${entry.key}" th:value="${entry.value}" />
+    <button type="submit">상세 페이지 이동 (POST)</button>
+</form>
+</body>
+</html>

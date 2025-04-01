@@ -1,0 +1,38 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.site-logo img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;  /* 로고와 로그인 제목 사이에 여백 추가 */
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.login-container img {
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}

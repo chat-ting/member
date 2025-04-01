@@ -1,0 +1,42 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">title</title>
+    <link rel="stylesheet" th:href="@{/css/style2.css}"/>
+
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+
+    <aside th:replace="~{fragments/aside :: aside}"></aside>
+    <div class="main-content">
+        <h1>Setting</h1>
+        <form id="keywordForm" th:action="@{/api/view/keyword}" method="post">
+            <input type="text" id="keyword" name="keyword" placeholder="Enter keyword" required/>
+            <input type="hidden" id="boardTypeId" name="boardTypeId" value="1" readonly/>
+            <button type="submit">Register</button>
+        </form>
+
+        <h2>Registered Keywords</h2>
+        <ul>
+            <li th:each="keyword : ${keywords}">
+                <span th:text="${keyword.keyword}">Keyword Name</span>
+                <form th:action="@{/api/view/keyword}" th:method="delete" style="display: inline;">
+<!--                    <input type="hidden" name="_method" value="DELETE"/>-->
+                    <input type="hidden" name="keywordId" th:value="${keyword.id}"/>
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7ieP1b/6V6CwoE=" crossorigin="anonymous"></script>
+<!-- jQuery가 로드된 이후에 common.js 로드 -->
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>

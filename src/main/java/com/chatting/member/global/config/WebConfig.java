@@ -33,6 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/**")
                 .excludePathPatterns(
                         "/api/kakao/**",
+                        "/api/rest/kakao/**",
                         "/api/token/by/refresh");
 
 

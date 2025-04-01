@@ -40,8 +40,8 @@ kakao:
   host-name: KAKAO
   client-id: 9f5301883be53d41cb71e73477880f09
   client-secret: vqB5MUBR3aqfL0DDaKkJGO8S5NagiyuB
-  redirect-uri: http://localhost:8764/api/rest/kakao/callback
-  logout-redirect-uri: http://localhost:8764/
+  redirect-uri: http://123.213.205.236:8080/api/rest/kakao/callback
+  logout-redirect-uri: http://123.213.205.236:8080/
 
 jwt:
   secret-key: tempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkey

@@ -29,6 +29,8 @@ spec:
             periodSeconds: 5
 
           env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/data
             - name: POSTGRES_DB
               value: {{ .Values.postgresql.db }}
             - name: POSTGRES_USER
@@ -46,7 +48,8 @@ spec:
               subPath: init.sql
       volumes:
         - name: db-storage
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: chat-ting-member-db-pvc
         - name: init-sql
           configMap:
             name: chat-ting-member-db-init

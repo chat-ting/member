@@ -44,3 +44,13 @@ jwt:
   secret-key: ${JWT_SECRET_KEY}
   access-token-expiration-time: 900000 #60*15*1000
   refresh-token-expiration-time: 259200000 #60*60*24*3*1000
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health

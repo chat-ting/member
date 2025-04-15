@@ -1,0 +1,31 @@
+postgresql:
+  image: postgres:15
+  db: chat_ting_member
+  user: member_chat_ting
+  password: member_chat_ting
+
+
+backend:
+  ingress:
+    enabled: true
+    host: chat-ting.shop
+  image:
+    repository: yanoos555/chat-ting-member
+    tag: 0.1.9
+  service:
+    port: 8080
+  config:
+    SPRING_PROFILES_ACTIVE: prod
+    POSTGRES_DB_HOST: chat-ting-member-db
+    POSTGRES_DB_PORT: "5432"
+    POSTGRES_DB_NAME: chat_ting_member
+    POSTGRES_USER: member_chat_ting
+    KAKAO_REDIRECT_URI: http://chat-ting.shop/api/rest/kakao/callback
+    KAKAO_LOGOUT_REDIRECT_URI: http://chat-ting.shop/
+    KAFKA_BOOTSTRAP_SERVERS: asdf
+    KAFKA_BOOTSTRAP_SERVERS_PORT: "12345"
+  secret:
+    POSTGRES_PASSWORD: member_chat_ting
+    KAKAO_CLIENT_ID: 9f5301883be53d41cb71e73477880f09
+    KAKAO_CLIENT_SECRET: vqB5MUBR3aqfL0DDaKkJGO8S5NagiyuB
+    JWT_SECRET_KEY: tempsecretkeytempsecretkeytempsecretkeytempsecretkey

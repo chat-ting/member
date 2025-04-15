@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-ting-member-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-ting-member-db
+  template:
+    metadata:
+      labels:
+        app: chat-ting-member-db
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.postgresql.image }}
+          ports:
+            - containerPort: 5432
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 2
+            periodSeconds: 5
+
+          env:
+            - name: POSTGRES_DB
+              value: {{ .Values.postgresql.db }}
+            - name: POSTGRES_USER
+              value: {{ .Values.postgresql.user }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: chat-ting-member-db-secret
+                  key: password
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: db-storage
+            - mountPath: /docker-entrypoint-initdb.d/init.sql
+              name: init-sql
+              subPath: init.sql
+      volumes:
+        - name: db-storage
+          emptyDir: {}
+        - name: init-sql
+          configMap:
+            name: chat-ting-member-db-init

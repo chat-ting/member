@@ -90,7 +90,7 @@ tasks.named('test') {
 
 //========================querydsl 추가 시작========================
 // === ⭐ QueryDsl 빌드 옵션 (선택) ===
-def querydslSrcDir = "/generated/querydsl"
+def querydslSrcDir = layout.buildDirectory.dir("generated/querydsl")
 //gradle build 시 QClass 소스도 함께 build 하기 위해서 sourceSets 에 해당 위치를 추가
 sourceSets {
     main.java.srcDirs += [ querydslSrcDir ]

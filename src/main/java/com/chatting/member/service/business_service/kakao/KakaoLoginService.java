@@ -7,6 +7,7 @@ import com.chatting.member.global.jwt.service.JwtTokenService;
 import com.chatting.member.global.util.WebClientService;
 import com.chatting.member.global.util.dto.KakaoTokenResDTO;
 import com.chatting.member.controller.dto.KakaoUser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,7 +46,7 @@ public class KakaoLoginService {
 
 
     @Transactional
-    public MyJwtDTO getUserInfoByReceivedAuthorizationCode(Map<String, String> params) {
+    public MyJwtDTO getUserInfoByReceivedAuthorizationCode(Map<String, String> params) throws JsonProcessingException {
         String authorizationCode =  params.get("code");
         log.info("authorizationCode = {}", authorizationCode);
 

@@ -4,6 +4,7 @@ package com.chatting.member.controller.kakao;
 import com.chatting.member.global.jwt.dto.MyJwtDTO;
 import com.chatting.member.global.jwt.service.JwtTokenService;
 import com.chatting.member.service.business_service.kakao.KakaoLoginService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +46,7 @@ public class KakaoLoginRestController {
 
     //인가코드 받아서 카카오토큰 요청 -> 카카오토큰으로 유저 정보 가져오기
     @GetMapping("/callback")
-    public ResponseEntity<?> getUserInfoByReceivedAuthorizationCode(@RequestParam Map<String, String> params, HttpServletResponse response) {
+    public ResponseEntity<?> getUserInfoByReceivedAuthorizationCode(@RequestParam Map<String, String> params, HttpServletResponse response) throws JsonProcessingException {
         MyJwtDTO userInfoByReceivedAuthorizationCode = kakaoLoginService.getUserInfoByReceivedAuthorizationCode(params);
         log.info("getUserInfoByReceivedAuthorizationCode success");
         String accessToken = userInfoByReceivedAuthorizationCode.getAccessToken();

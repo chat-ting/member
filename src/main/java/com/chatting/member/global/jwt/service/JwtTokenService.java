@@ -1,23 +1,32 @@
 package com.chatting.member.global.jwt.service;
 
+import com.chatting.member.controller.dto.AuthUserInfo;
+import com.chatting.member.global.entity.member.Member;
 import com.chatting.member.global.exception.BusinessException;
 import com.chatting.member.global.exception.code.CommonErrorCode;
 import com.chatting.member.global.jwt.TokenType;
 import com.chatting.member.global.jwt.dto.TokensResponseDto;
+import com.chatting.member.repository.member.MemberRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Date;
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class JwtTokenService {
     @Value("${jwt.access-token-expiration-time}")
     private int ACCESS_TOKEN_EXPIRATION_TIME;
@@ -26,19 +35,36 @@ public class JwtTokenService {
     @Value("${jwt.secret-key}")
     private String JWT_SECRET_KEY;
     public static final String AUTHORIZATION_HEADER = "Authorization";
+    private final RedisTemplate<String, String> redisTemplate;
+    private final MemberRepository memberRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     //=========================토큰 생성 관련 시작=========================
-    public String generateAccessToken(Long memberId) {
+    public String generateAccessToken(Long memberId) throws JsonProcessingException {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + ACCESS_TOKEN_EXPIRATION_TIME);
         SecretKey key = Keys.hmacShaKeyFor(JWT_SECRET_KEY.getBytes(StandardCharsets.UTF_8));
-        return Jwts.builder()
+
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new BusinessException(CommonErrorCode.MEMBER_NOT_FOUND));
+
+        String accessToken = Jwts.builder()
                 .setSubject(TokenType.ACCESS.name())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .claim("memberId", memberId)
                 .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
+        // Redis에 accessToken과 memberId 저장
+        AuthUserInfo authUserInfo = AuthUserInfo.builder().
+                memberId(member.getId())
+                .username(member.getNickname())
+                .build();
+        String jsonAuthUserInfo = objectMapper.writeValueAsString(authUserInfo);
+
+        Duration ttl = Duration.ofMillis(expiryDate.getTime() - now.getTime());
+        redisTemplate.opsForValue().set(accessToken,jsonAuthUserInfo,ttl);
+
+        return accessToken;
     }
     public String generateRefreshToken(Long memberId) {
         Date now = new Date();

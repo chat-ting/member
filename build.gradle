@@ -77,7 +77,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core:2.17.1'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.17.1'
-
+    //actuator
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
 }
 
 tasks.named('test') {

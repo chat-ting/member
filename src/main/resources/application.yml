@@ -27,7 +27,15 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         use_sql_comments: true
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
 jwt:
   secret-key: temp-secret-key
   access-token-expiration-time: 900000 #60*15*1000

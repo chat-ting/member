@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  data:
+    redis:
+      host: redis
+      port: 6379
   datasource:
     driver-class-name: org.postgresql.Driver # PostgreSQL JDBC ????? ?????.
     url: jdbc:postgresql://${POSTGRES_DB_HOST}:${POSTGRES_DB_PORT}/${POSTGRES_DB_NAME}?serverTimezone=UTC

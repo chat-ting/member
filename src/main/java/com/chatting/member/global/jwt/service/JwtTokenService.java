@@ -155,7 +155,7 @@ public class JwtTokenService {
     }
 
 
-    public TokensResponseDto regenerateTokensByRefreshToken(HttpServletRequest request, HttpServletResponse response) {
+    public TokensResponseDto regenerateTokensByRefreshToken(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
         String jwt = getJwtFromRequest(request,TokenType.REFRESH);
         validateToken(jwt,TokenType.REFRESH, response);
         Long memberId = getUserIdFromJwt(jwt);

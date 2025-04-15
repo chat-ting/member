@@ -12,7 +12,7 @@ spring:
         enabled: true
   data:
     redis:
-      host: redis
+      host: localhost
       port: 6379
   datasource:
     driver-class-name: org.postgresql.Driver

@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver # PostgreSQL JDBC ????? ?????.
-    url: jdbc:postgresql://localhost:5432/chat_ting?serverTimezone=UTC # ?????? ?? 'shop' ??????? ???? ?? JDBC URL???.
+    url: jdbc:postgresql://localhost:5432/chat_ting_member?serverTimezone=UTC # ?????? ?? 'shop' ??????? ???? ?? JDBC URL???.
     platform: postgres # ???? ?????? ???? ?????.
     username: postgres # ?????? ??? ?? ??? ?????.
     password: qwer1234 # ?????? ??? ?? ???????.
@@ -38,10 +38,10 @@ spring:
 
 kakao:
   host-name: KAKAO
-  client-id: 9f5301883be53d41cb71e73477880f09
-  client-secret: vqB5MUBR3aqfL0DDaKkJGO8S5NagiyuB
-  redirect-uri: http://123.213.205.236:8080/api/rest/kakao/callback
-  logout-redirect-uri: http://123.213.205.236:8080/
+  client-id: 347de8d77df3864181f0afb3e3ef11e9
+  client-secret: 4ixodxYNoECeFIBbYLfyBmtMj8gu12n5
+  redirect-uri: http://localhost:8080/api/kakao/callback
+  logout-redirect-uri: http://localhost:8080/
 
 jwt:
   secret-key: tempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkeytempsecretkey

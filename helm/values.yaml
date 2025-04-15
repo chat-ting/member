@@ -11,7 +11,7 @@ backend:
     host: chat-ting.shop
   image:
     repository: yanoos555/chat-ting-member
-    tag: 0.1.9
+    tag: latest
   service:
     port: 8080
   config:

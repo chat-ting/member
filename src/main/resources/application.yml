@@ -36,6 +36,8 @@ management:
     health:
       probes:
         enabled: true
+  security:
+    enabled: false  # ✅ actuator 보안 비활성화
 jwt:
   secret-key: temp-secret-key
   access-token-expiration-time: 900000 #60*15*1000

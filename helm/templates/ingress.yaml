@@ -4,18 +4,28 @@ kind: Ingress
 metadata:
   name: chat-ting-member-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2  # ✅ /member/aaa → /aaa로 rewrite
+    cert-manager.io/cluster-issuer: letsencrypt-prod  # ✅ cert-manager에게 HTTPS 인증서 요청 위임
+
 spec:
   ingressClassName: nginx
   rules:
     - host: {{ .Values.backend.ingress.host }}
       http:
         paths:
-          - path: /
+          - path: /member(/|$)(.*)
             pathType: Prefix
             backend:
               service:
                 name: chat-ting-member
                 port:
                   number: {{ .Values.backend.service.port }}
+          - path: /chatting(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-ting-server
+                port:
+                  number: {{ .Values.backend.service.port }}
+
 {{- end }}

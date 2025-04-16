@@ -8,7 +8,12 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod  # ✅ cert-manager에게 HTTPS 인증서 요청 위임
 
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx  # ✅ nginx ingress controller를 사용
+  tls:
+    - hosts:
+        - {{ .Values.backend.ingress.host }}  # ✅ 예: chat-ting.shop
+      secretName: chat-ting-tls  # ✅ 인증서 저장될 시크릿 이름 (자동 생성됨)
+
   rules:
     - host: {{ .Values.backend.ingress.host }}
       http:
@@ -27,5 +32,4 @@ spec:
                 name: chat-ting-server
                 port:
                   number: {{ .Values.backend.service.port }}
-
 {{- end }}
